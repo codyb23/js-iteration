@@ -26,6 +26,10 @@
  * }
  */
 
+const yelling = array => {
+  return array.map(word => word.toUpperCase())
+}
+
 // ...
 
 /**
@@ -34,7 +38,9 @@
  * numbers as an argument and returns a new array with all
  * the numbers multiplied by 2
  */
-
+const doubleTrouble = array => {
+  return array.map(number => number * 2)
+}
 // ...
 
 /*
@@ -42,21 +48,27 @@
  * strings as an argument and returns a new array with each string
  * suffixed with " is at index X" where X is the index of the element
  */
-
+const stringyIndexes = array => {
+  return array.map((data, index) => `${data} is at index ${index}`)
+}
 // ...
 
 /*
  * 4) Define a function onlyTheEvenSurvive that accepts an array of
  * numbers and returns only the elements that are even
  */
-
+const onlyTheEvenSurvive = array => {
+  return array.filter(number => number % 2 === 0)
+}
 // ...
 
 /*
  * 5) Define a function onlyTheEvenIndexedSurvive that accepts an array of
  * numbers and returns only the elements at indexes that are even
  */
-
+const onlyTheEvenIndexedSurvive = array => {
+  return array.filter((data, index) => index % 2 === 0)
+}
 // ...
 
 /*
@@ -72,7 +84,11 @@
  *   score: 99
  * }
  */
-
+const bestMoviesOfTheYear = (array, year) => {
+  return array
+    .filter(movie => movie.year === year && movie.score > 90)
+    .map(movie => movie.name)
+}
 // ...
 
 /*
@@ -80,7 +96,9 @@
  * numbers and returns true if every element of the array is
  * odd.
  */
-
+const everyoneIsOdd = array => {
+  return array.every(odds => odds % 2 === 1)
+}
 // ...
 
 /*
@@ -88,7 +106,9 @@
  * strings and returns the one string that contains the word
  * `needle` inside
  */
-
+const findTheNeedle = array => {
+  return array.find(phrase => phrase.includes('needle'))
+}
 // ...
 
 /*
@@ -96,7 +116,9 @@
  * strings and returns the index of the string that contains
  *  the word `needle` inside
  */
-
+const findTheNeedleIndex = array => {
+  return array.findIndex(index => index.includes('needle'))
+}
 // ...
 
 /*
@@ -104,7 +126,9 @@
  * strings and returns true if at least one string is exactly
  * four characters long
  */
-
+const someoneToLove = array => {
+  return array.some(phrase => phrase.length === 4)
+}
 // ...
 
 /*
@@ -115,6 +139,15 @@
  *
  * So no using forEach, map, filter, reduce, etc.
  */
+
+const mapYourself = array => {
+  let doubleArray = []
+  for (let index = 0; index < array.length; index++) {
+    const double = array[index] * 2
+    doubleArray.push(double)
+  }
+  return doubleArray
+}
 
 // ...
 
@@ -127,7 +160,16 @@
  *
  * So no using forEach, map, filter, reduce, etc.
  */
-
+const filterYourself = array => {
+  let evenArray = []
+  for (let index = 0; index < array.length; index++) {
+    if (array[index] % 2 === 0) {
+      const even = array[index]
+      evenArray.push(even)
+    }
+  }
+  return evenArray
+}
 // ...
 
 /*
@@ -139,6 +181,14 @@
  *
  * So no using forEach, map, filter, reduce, etc.
  */
+const everyYourself = array => {
+  for (let index = 0; index < array.length; index++) {
+    if (array[index] % 2 === 1) {
+      return false
+    }
+  }
+  return true
+}
 
 // ...
 
@@ -339,12 +389,10 @@ test('Function Check - filter yourself', t =>
   ensureDefined(t, 'filterYourself'))
 test('filterYourself()', t => {
   const original = Array.prototype.filter
-
   Array.prototype.filter = () => []
-
-  t.deepEqual(filterYourself([8, 1, 2, 3]), [8, 2])
-
+  const result = filterYourself([8, 1, 2, 3])
   Array.prototype.filter = original
+  t.deepEqual(result, [8, 2])
 })
 
 test('Function Check - Every Yourself', t => ensureDefined(t, 'everyYourself'))
